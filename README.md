@@ -23,7 +23,6 @@ ESTRUTURA
 		
 	- FORNECEDOR;
 		NOME;
-		FOTO;
 		- DOCUMENTO;
 			NUMERO;
 			TIPO;
@@ -71,3 +70,7 @@ ESTRUTURA
 	- CONFIGURACAO
 		QUANTIDADE_PARCELA;
 	
+
+
+OBS : Com esse pequeno projeto peço a todos que deixe as ideias fluir, nao facam so o feijão com arroz.
+
