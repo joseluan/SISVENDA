@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block conteudo %}
+<div id="conteudo">
+  <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Cliente</th>
+            <th>Preço</th>
+            <th>Parcelas</th>
+            <th>Cancelar</th>
+            <th>Pagar</th>
+          </tr>
+        </thead>
+  {% for venda in vendas %}
+        <tbody>
+          <tr data-mdl-data-table-selectable-name="materials[]" data-mdl-data-table-selectable-value="acrylic">
+            <td class="mdl-data-table__cell--non-numeric">{{ venda.produto.nome }}</td>
+            <td>{{ venda.cliente.nome }}</td>
+            <td>{{ venda.finaceiro.valor }}</td>
+            <td>{{ venda.finaceiro.parcela }}</td>
+
+            <td>
+              <a href="#">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                  Excluir
+                </button>
+              </a>
+            </td>
+
+            <td>
+              <a href="{% url 'vendas_pagar' pk=venda.pk %}">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                  Pagar
+                </button>
+              </a>
+            </td>
+
+          </tr>
+        </tbody>
+  {% endfor %}
+  </table>
+
+  <div class="pagination">
+      <span class="step-links">
+          {% if vendas.has_previous %}
+              <a href="?page={{ vendas.previous_page_number }}">anterior</a>
+          {% endif %}
+
+          <span class="current">
+              Página {{ vendas.number }} de {{vendas.paginator.num_pages }}.
+          </span>
+
+          {% if vendas.has_next %}
+              <a href="?page={{ vendas.next_page_number }}">próxima</a>
+          {% endif %}
+      </span>
+  </div>
+</div>
+{% endblock %}

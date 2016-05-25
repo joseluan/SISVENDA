@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block conteudo %}
+
+	<a href="{% url 'adicionar_produto' %}">
+	<button  class="mdl-button mdl-js-button mdl-js-ripple-effect">
+	  Adicionar
+	</button>
+	</a>
+
+    <ul>	 
+        {% for produto in produtos %}
+            <li>
+                <div class="mdl-grid portfolio-max-width">
+                            <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
+                                <div class="mdl-card__media">
+                                    <img class="article-image" src="{{ produto.foto.url }}" border="0" alt="">
+                                </div>
+                                <div class="mdl-card__title">
+                                    <h2 class="mdl-card__title-text">{{ produto.nome }}</h2>
+                                </div>
+                                <div class="mdl-card__supporting-text">
+                                    {{ produto.descricao }}
+                                </div>
+                                <div class="mdl-card__actions mdl-card--border">
+                                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="portfolio-example01.html">Read more</a>
+                                </div>
+                            </div>
+                </div>
+            </li>
+        {% endfor %} 
+    </ul>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if produtos.has_previous %}
+            <a href="?page={{ produtos.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ produtos.number }} of {{ produtos.paginator.num_pages }}.
+        </span>
+
+        {% if produtos.has_next %}
+            <a href="?page={{ produtos.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

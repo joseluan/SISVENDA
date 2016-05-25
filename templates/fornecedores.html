@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block conteudo %}
+<div id="conteudo">
+  <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Documento</th>
+            <th>Endereço</th>>
+          </tr>
+        </thead>
+  {% for fornecedor in fornecedores %}
+        <tbody>
+          <tr data-mdl-data-table-selectable-name="materials[]" data-mdl-data-table-selectable-value="acrylic">
+            
+            <td class="mdl-data-table__cell--non-numeric">{{ fornecedores.nome }}</td>
+            <td>{{ venda.cliente.nome }}</td>
+            <td>{{ venda.finaceiro.valor }}</td>
+            <td>{{ venda.finaceiro.parcela }}</td>
+
+          </tr>
+        </tbody>
+  {% endfor %}
+  </table>
+
+  <div class="pagination">
+      <span class="step-links">
+          {% if vendas.has_previous %}
+              <a href="?page={{ vendas.previous_page_number }}">anterior</a>
+          {% endif %}
+
+          <span class="current">
+              Página {{ vendas.number }} de {{vendas.paginator.num_pages }}.
+          </span>
+
+          {% if vendas.has_next %}
+              <a href="?page={{ vendas.next_page_number }}">próxima</a>
+          {% endif %}
+      </span>
+  </div>
+</div>
+{% endblock %}
