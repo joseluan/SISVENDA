@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 from django import forms
 
-class FormFotoCliente(forms.Form):
-	foto = forms.ImageField() 
-
+class ImageUploadForm(forms.Form):
+    """Image upload form."""
+    image = forms.ImageField()

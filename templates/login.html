@@ -1,54 +1,13 @@
-{% extends 'base.html' %}
 {% load staticfiles %}
-{% block conteudo %}
-<!-- Wide card with share menu button -->
-<style>
-.demo-card-wide.mdl-card {
-  width: 512px;
-  top: 80px;
-  margin-bottom: 20%;
-  left: 34%;
-}
-.demo-card-wide > .mdl-card__title {
-  color: #fff;
-  height: 176px;
-  background: url("{% static 'imagens/login.jpg' %}") center / cover;
-}
-.demo-card-wide > .mdl-card__menu {
-  color: #fff;
-}
-div#usuario{
-  left: 17%;
-}
-div#senha{
-  left: 17%;
-}
-</style>
 
-<div class="demo-card-wide mdl-card mdl-shadow--2dp">
-    <div class="mdl-card__title">
-        <h2 class="mdl-card__title-text">Bem vindo, faça o login para proseguir...</h2>
-    </div>
-    <div class="mdl-card__supporting-text">
-          <!-- Textfield with Floating Label -->
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="usuario">
-            <input class="mdl-textfield__input" type="text" id="sample3" name="usuario">
-            <label class="mdl-textfield__label" for="sample3">Usuário...</label>
-        </div><br>
-
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="senha">
-            <input class="mdl-textfield__input" type="text" id="sample4" name="senha">
-            <label class="mdl-textfield__label" for="sample4">Senha...</label>
-        </div><br>
-
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="submit" value="Entrar" />
-
-   </div>
-
-</div>
-
-{% endblock %}
+<form action="{% url 'adicionar_produto' %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+                <p>
+                    <input id="id_image" type="file" class="" name="image">
+                </p>
+                <input type="submit" value="Submit" />
+      
+            </form>
+  {% for ft in fotos %}
+      <img src="{{ ft.imagens.url }}">  
+  {% endfor %}

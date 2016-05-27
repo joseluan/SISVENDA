@@ -1,16 +1,40 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+
+{% block menu %}
+                <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
+                    <a class="mdl-navigation__link is-active" href="{% url 'index' %}">Produtos</a>
+                    <a class="mdl-navigation__link" href="{% url 'vendas' %}">Vendas</a>
+                    <a class="mdl-navigation__link" href="{% url 'fornecedores' %}">Fornecedores</a>
+                    <a class="mdl-navigation__link" href="{% url 'entrar' %}">Login</a>
+                </nav>
+{% endblock %}
+
 {% block conteudo %}
+    <style type="text/css" media="screen">
+        div#produto{
+            width: 150%;
+            margin-left: 25%;
+            margin-right: 0px;
+        }
+    </style>
+	
 
-	<a href="{% url 'adicionar_produto' %}">
-	<button  class="mdl-button mdl-js-button mdl-js-ripple-effect">
-	  Adicionar
-	</button>
-	</a>
-
-    <ul>	 
+    <form class="ui form" action="" method="post" id="form" role="form">
+        {% csrf_token %}
+        <input class="mdl-textfield__input" type="text" id="pesquisa" name="pesquisa" size="25" maxlength="30">
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">
+            Pesquisar
+        </button>
+    </form>
+    <a href="{% url 'adicionar_produto' %}">
+        <button  class="mdl-button mdl-js-button mdl-js-ripple-effect">
+            Adicionar
+        </button>
+    </a>    
+	 
         {% for produto in produtos %}
-            <li>
+            <div id="produto">
                 <div class="mdl-grid portfolio-max-width">
                             <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
                                 <div class="mdl-card__media">
@@ -23,26 +47,26 @@
                                     {{ produto.descricao }}
                                 </div>
                                 <div class="mdl-card__actions mdl-card--border">
-                                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="portfolio-example01.html">Read more</a>
+                                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="{% url 'comprar' pk=produto.pk %}">Comprar</a>
+                                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="{% url 'editar_produto' pk=produto.pk %}">Editar</a>
                                 </div>
                             </div>
                 </div>
-            </li>
+            </div>
         {% endfor %} 
-    </ul>
 
 <div class="pagination">
     <span class="step-links">
         {% if produtos.has_previous %}
-            <a href="?page={{ produtos.previous_page_number }}">previous</a>
+            <a href="?page={{ produtos.previous_page_number }}">anterior</a>
         {% endif %}
 
         <span class="current">
-            Page {{ produtos.number }} of {{ produtos.paginator.num_pages }}.
+            Pagina {{ produtos.number }} de {{ produtos.paginator.num_pages }}.
         </span>
 
         {% if produtos.has_next %}
-            <a href="?page={{ produtos.next_page_number }}">next</a>
+            <a href="?page={{ produtos.next_page_number }}">próxima</a>
         {% endif %}
     </span>
 </div>

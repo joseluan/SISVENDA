@@ -12,36 +12,34 @@
 
 
 {% block conteudo %}
-          <form class="ui form" action="" method="post" id="form" role="form">
-            {% csrf_token %}
-              <input class="mdl-textfield__input" type="text" id="pesquisa" name="pesquisa" size="25" maxlength="30">
-              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">
-                Pesquisar
-              </button>
-          </form>
-
+              <input class="mdl-textfield__input" type="text" id="pesquisa" name="pesquisa">
+              <a href="{% url 'vendas_pesquisar' pk=venda.pk %}">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                  Pesquisar
+                </button>
+              </a>
 <div id="conteudo">
   <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable">
         <thead>
           <tr>
-            <th><h4>Nome</h4></th>
-            <th><h4>Cliente</h4></th>
-            <th><h4>Preço</h4></th>
-            <th><h4>Parcelas</h4></th>
-            <th><h4>Cancelar</h4></th>
-            <th><h4>Pagar</h4></th>
+            <th>Nome</th>
+            <th>Cliente</th>
+            <th>Preço</th>
+            <th>Parcelas</th>
+            <th>Cancelar</th>
+            <th>Pagar</th>
           </tr>
         </thead>
   {% for venda in vendas %}
         <tbody>
           <tr data-mdl-data-table-selectable-name="materials[]" data-mdl-data-table-selectable-value="acrylic">
-            <td class="mdl-data-table__cell--non-numeric"><h5>{{ venda.produto.nome }}</h5></td>
-            <td><h5>{{ venda.cliente.nome }}</h5></td>
-            <td><h5>{{ venda.finaceiro.valor }}</h5></td>
-            <td><h5>{{ venda.finaceiro.parcela }}</h5></td>
+            <td class="mdl-data-table__cell--non-numeric">{{ venda.produto.nome }}</td>
+            <td>{{ venda.cliente.nome }}</td>
+            <td>{{ venda.finaceiro.valor }}</td>
+            <td>{{ venda.finaceiro.parcela }}</td>
 
             <td>
-              <a href="{% url 'vendas_excluir' pk=venda.pk %}">
+              <a href="#">
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
                   Excluir
                 </button>

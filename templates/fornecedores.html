@@ -1,23 +1,45 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+
+{% block menu %}
+                <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
+                    <a class="mdl-navigation__link" href="{% url 'index' %}">Produtos</a>
+                    <a class="mdl-navigation__link" href="{% url 'vendas' %}">Vendas</a>
+                    <a class="mdl-navigation__link is-active" href="{% url 'fornecedores' %}">Fornecedores</a>
+                    <a class="mdl-navigation__link" href="{% url 'entrar' %}">Login</a>
+                </nav>
+{% endblock %}
+
 {% block conteudo %}
+
+    <form class="ui form" action="" method="post" id="form" role="form">
+        {% csrf_token %}
+        <input class="mdl-textfield__input" type="text" id="pesquisa" name="pesquisa" size="25" maxlength="30">
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">
+            Pesquisar
+        </button>
+        
+    </form>
+    <a href="{% url 'adicionar_fornecedor' %}">
+        <button  class="mdl-button mdl-js-button mdl-js-ripple-effect">
+            Adicionar
+        </button>
+    </a>
+
 <div id="conteudo">
   <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable">
         <thead>
           <tr>
-            <th>Nome</th>
-            <th>Documento</th>
-            <th>Endereço</th>>
+            <th><h4>Nome</h4></th>
+            <th><h4>UserName</h4></th>
           </tr>
         </thead>
   {% for fornecedor in fornecedores %}
         <tbody>
           <tr data-mdl-data-table-selectable-name="materials[]" data-mdl-data-table-selectable-value="acrylic">
             
-            <td class="mdl-data-table__cell--non-numeric">{{ fornecedores.nome }}</td>
-            <td>{{ venda.cliente.nome }}</td>
-            <td>{{ venda.finaceiro.valor }}</td>
-            <td>{{ venda.finaceiro.parcela }}</td>
+            <td><h5>{{ fornecedor.nome }}</h5></td>
+            <td><h5>{{ fornecedor.username }}</h5></td>
 
           </tr>
         </tbody>
@@ -26,16 +48,16 @@
 
   <div class="pagination">
       <span class="step-links">
-          {% if vendas.has_previous %}
-              <a href="?page={{ vendas.previous_page_number }}">anterior</a>
+          {% if fornecedores.has_previous %}
+              <a href="?page={{ fornecedores.previous_page_number }}">anterior</a>
           {% endif %}
 
           <span class="current">
-              Página {{ vendas.number }} de {{vendas.paginator.num_pages }}.
+              Página {{ fornecedores.number }} de {{ fornecedores.paginator.num_pages }}.
           </span>
 
-          {% if vendas.has_next %}
-              <a href="?page={{ vendas.next_page_number }}">próxima</a>
+          {% if fornecedores.has_next %}
+              <a href="?page={{ fornecedores.next_page_number }}">próxima</a>
           {% endif %}
       </span>
   </div>

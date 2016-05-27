@@ -23,7 +23,7 @@
 .demo-card-wide > .mdl-card__title {
   color: #fff;
   height: 176px;
-  background: url("{% static 'imagens/login.jpg' %}") center / cover;
+  background: url("{{ produto.foto.url }}") center / cover;
 }
 .demo-card-wide > .mdl-card__menu {
   color: #fff;
@@ -34,32 +34,34 @@
 	{% csrf_token %}
     <div class="demo-card-wide mdl-card mdl-shadow--2dp">
 
+    	<div class="mdl-card__title"></div>
+
 	    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="nome">
-	        <input id="id_image" type="file" class="" name="image">
+	        <input id="id_image" type="file" class="" name="image" value="{{ produto.foto.url }}">
 	    </div><br>
 
 	    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="nome">
-	        <input class="mdl-textfield__input" type="text" id="nome" name="nome" >
+	        <input class="mdl-textfield__input" type="text" id="nome" name="nome" value="{{ produto.nome }}">
 	        <label class="mdl-textfield__label" for="sample3">Nome</label>
 	    </div><br>
 
 	    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="nome">
-	        <input name="valor" id="valor" type="number" size="10" max="999999999" min="0"/>
+	        <input name="valor" id="valor" type="number" size="10" max="999999999" min="0" value="{{ produto.valor }}" />
 	        <label class="mdl-textfield__label" for="sample3">Valor</label>
 	    </div><br>
 
 	    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="nome">
-	        <textarea id="descricao" name="descricao" cols="60"rows="5" type="text"></textarea>
+	        <textarea id="descricao" name="descricao" cols="60"rows="5" type="text">{{ produto.descricao }}</textarea>
 	        <label class="mdl-textfield__label" for="sample3">Descrição</label>
 	    </div><br>
 
 	    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="nome">
-	        <input name="estoque" id="estoque" type="number" size="10" max="999999" min="0"/>
+	        <input name="estoque" id="estoque" type="number" size="10" max="999999" min="0" value="{{ produto.estoque }}" />
 	        <label class="mdl-textfield__label" for="sample3">Estoque</label>
 	    </div><br>
 
 	    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">
-	        Cadastrar
+	        Editar
 	    </button>
 
     </div>
